@@ -63,9 +63,6 @@ user.sayHello();
 
 ///////////////////////////////////////Q8
 let calc = {};
-let x = 0;
-let y = 0;
-let result  = 0;
 
 calc.add = function(x,y){
     result = x + y;
@@ -94,10 +91,9 @@ calc.divide(10,2);
 ///////////////////////////////////////Q9
 function remainder(x,y){
     result = x % y;
-    return result;
+    console.log(`${x}を${y}で割ったあまりは${result}です。`);
 }
-
-console.log('5を3で割ったあまりは' + remainder(5,3) + 'です。');
+remainder(5,3);
 
 ///////////////////////////////////////Q10
 // xのスコープがローカル変数となっており変数xが使用できる範囲が関数foo内に限定しているためコンソール出力をしようとしても変数を参照することができないから
@@ -105,20 +101,26 @@ console.log('5を3で割ったあまりは' + remainder(5,3) + 'です。');
 
 //以下応用問題
 ///////////////////////////////////////Q1
-let random = Math.random();
-console.log(`random ==> ${random}`);
+let random = Math.floor(Math.random() * (9 + 1));
+console.log('random ==>', random);
+
+
 
 ///////////////////////////////////////Q2-1
-function doFunc(callback){
-    console.log('3秒後にHelloと出力');
-    callback();
+function exampleFunc(callbakc){
+    
+    setTimeout(
+        function(){
+            console.log('Hello World!');
+        },3000
+    );
+    callbakc();
+
 }
-doFunc( function(){
-    let timeToGreet = function(){
-        console.log('Hello World!');
-    }
-    setTimeout(timeToGreet, 3000);
-});
+function callExample(){
+    console.log('callExampleが実行されました');
+}
+exampleFunc(callExample);
 
 ///////////////////////////////////////Q2-2
 function printName(firstName, formatter) {
@@ -143,10 +145,13 @@ getSign(-0.1);
 
 /////////////////////////////////////// Q4
 let numbers = [];
-let sum = 0;
-for(let i = 0; i < 100; i++){
-    numbers += i;
-}
+
+numbers.addNumArray = function (){
+        for(let i = 0; i < 100; i++){
+            numbers.push(i);
+        }
+    };
+numbers.addNumArray();
 console.log(numbers);
 
 ///////////////////////////////////////Q5
@@ -157,13 +162,11 @@ for(let i = 0; i < mixed.length; i++){
     let type = typeof mixed[i];
     let newNum = mixed[i];
 
-    if(type === 'number'){
-        if(newNum % 2 === 0){
-            console.log('even');
-        }else if(newNum % 2 === 1){
-            console.log('odd');
-        }
+    if(type === 'number' && newNum % 2 === 0){
+        console.log(newNum,'==> even');
+        }else if(type === 'number' && newNum % 2 === 1){
+            console.log(newNum,'==> odd');
     }else{
-        console.log('not number');
+        console.log(newNum, '==> not number');
     }
 }
